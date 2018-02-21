@@ -1,1 +1,10 @@
-# Lesson 1: Linear Regression
+# Lesson 1: Simple Linear Regression
+
+This is the readme file for the simple linear regression component of the meetups.
+
+It consists of:
+- Introductory slides
+- Dataset
+- R scripts
+- Python scripts
+
