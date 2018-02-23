@@ -1,0 +1,237 @@
+---
+title       : Finlad-Uganda Data science Meetup
+subtitle    : 
+author      : Myriam Munezero, Joshua Olayemi and Richard Ngamita
+job         : Think Africa, Enpse Group, Data Science Africa
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [mathjax, quiz, bootstrap] # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Plan for today
+- Introduction of organisers
+- What is Data Science?
+- Today's topic: Linear Regression
+- Training in R
+- Training in Python
+- Q&A and suggestions for future sessions
+- End of session
+
+---
+
+## Introduction of hosts 
+<img src="https://pbs.twimg.com/profile_images/660427564280889344/9qp_2Gbv_400x400.jpg" height=80px width=80px/> __Think Africa Ry__ 
+ 
+  - Myriam Munezero: 
+    - Director of Operations at Think Africa
+    - Post-doctoral researcher at University of Helsinki
+    - Website [http://myriammunezero.com/](Myriam's website)
+  
+  
+  - Joshua Olayemi: Founder and CEO at Enpse Group
+    - Website [https://www.linkedin.com/in/olayemi-akinsanya-527a4a56/](Joshua on LinkedIn)
+
+---
+## Introduction of hosts cont...
+
+<img src="http://www.datascienceafrica.org/img/logo.png" height=50 /> __Data Science Africa__
+  
+  - Richard Ngamita: Co-founder and Vice-Chairman of Data Science Africa
+    - Website [http://www.datascienceafrica.org](http://www.datascienceafrica.org)
+
+---
+## Why Data Science?
+
+<img class=center src="https://image.slidesharecdn.com/python4datascience-150519204755-lva1-app6892/95/python-for-data-science-2-638.jpg?cb=1432071320" height=400px />
+
+
+---
+## What is Data Science?
+
+<img class=center src="assets/img/whatdatascience.png" height = 400px width=400px />
+
+[http://i.imgur.com/nFXKnl7.png](source)
+
+---
+## Aim of these trainings
+
+- Develop hands-on skills on basic essential approaches in data science
+
+- Encourage collaboration between Finland and Uganda, and 
+
+- Solve problems particular to Africa - who better than us :)
+
+
+
+---
+## Structure of these trainings
+
+### Total of 4 trainings in 2018:
+
+- Linear regression (R & Python)
+
+- Data collection, cleaning, exploration, and visualization (R) ~ June
+
+- Supervised and Unsupervised classification (R) ~ August
+
+- Neural Networks (R) ~ October
+
+- A "Graduation" ~ November
+
+```{r echo=FALSE}
+# The aim is for these trainings to be interactice, we are also learning and will 
+# improve through interaction
+```
+
+---
+## Some practicalities
+
+- Trainings will be recorded and made available on our YouTube Channel
+
+- The slides and other learning materials will be made available on [https://github.com/mdoucem/Fin-Ug-Datascience-Meetup](github)
+
+- Course slides include extra reading matierials - lots of things to learn!
+
+---
+## Why R and Python
+
+### Both excelent for data science 
+
+- Free
+- Compehensive set of packages for
+  - Data access
+  - Data cleaning
+  - Analysis
+  - Data reporting
+- Good development environments
+- Amazing ecosystem of developers and 
+- Packages are easy to install
+
+For a good discussion of R vs. Python for data science [https://www.kdnuggets.com/2015/05/r-vs-python-data-science.html](read here).
+
+---
+## Today's topic - Linear Regression
+
+
+- Regression is probably the most fundamental topic for the data scientist.
+
+- A data scientist well versed in regression models will be able to solve an incredible array of problems.
+
+- Regression models are the workhorse of data science. They are the most well described, practical and theoretically understood models in statistics. 
+
+
+---
+## Regression terminology
+
+1. There is a dependent variable $Y$ - The Criterion variable
+
+2. Vaiables $X$ it depends on - the independent variable or the predictor variable or features
+
+As an example
+```{r echo=FALSE, fig.width=4, fig.height=4 }
+library(ggplot2)
+mydata<-cars
+colnames(mydata)<-c("X", "Y")
+head(mydata, row.names = False)
+#plot(x = mydata$X, y = mydata$Y, main = "X ~ Y")
+```
+
+---
+## Regression terminology cont...
+
+Linear regression -> finding the best-fitting straight line through a set of points.
+
+3. The best-fitting line is called a regression line
+
+- mathematically generalized as: $$Y_i = \beta_0 + \beta_1 X_i + \epsilon_{i}$$,
+  - where $\beta_{1}$ is the Intercept, and $\beta_{2}$ is the Slope i.e., coeffiecients or parameters and that's what we want to estimate.
+
+```{r echo = FALSE, out.width='20%', out.height='20%'}
+#library(ggplot2)
+#plot(cars$speed ~ cars$dist, main = "Dist ~ Speed")
+#lines(x=seq(0,100), y=seq(0,100))
+```
+
+---
+## Regression terminology cont...
+
+- The resulting line, models the relationship between Y and X
+
+  - Upward trend
+
+  - Downward trend
+
+  - Y does not depend on X
+  
+  <img class=center src="https://cdn-images-1.medium.com/max/560/1*N2usf10aKCq1JBIqxj-YFQ.png" height=200/>
+  
+  [http://slideplayer.com/slide/4474901/](source)
+
+---
+## Regression terminology cont...
+
+- Used to the estimate the value of  Y, when only the predictors (Xs) values are known.
+
+  - 'Simple' when X is only one variable
+  
+  - 'Multivariate' when X has many variables
+  
+<img src="assets/img/regression.png" height = 300 />
+
+[https://image.slidesharecdn.com/slides-linear-regression-160108114550/95/regression-analysis-using-python-33-1024.jpg?cb=1489404631] (source)
+
+---
+## Regression terminology cont...
+
+### Evaluate how good it is
+
+- Looking at our formula again, 
+  - mathematically generalized as: $$Y_i = \beta_0 + \beta_1 X_i + \epsilon_{i}$$,
+
+- Objective is to minimize the $\epsilon_{i}$ -> the difference between our observations and the predictors made by our linear model 
+
+<img src="assets/img/residuals.png" height=300px />
+
+[http://statstudent.tumblr.com/post/108699142671/simple-linear-regression-methods-ii-week-of](source)
+
+
+---
+## Let's get started with the practical exercise
+
+### Today's training will be on linear regression in R and Python.
+
+  - R, Rstudio and Pyhon introductions
+  
+  - Loading and exploring the dataset -> Salary data. 
+  
+  - Build a simple linear regression model and evaluate how good it is.
+  
+  - Use model for prediction.
+
+
+
+---
+
+## Feedback and Discussion
+
+- Wishes for the trainings
+
+- What should we do different?
+
+Contacts: 
+myriam@thinkafrica.fi 
+o.j@enpsegroup.com
+ngamita@gmail.com
+
+---
+## Extra reading materials
+
+- A great course with more stats and maths: https://www.coursera.org/learn/machine-learning/home/welcome
+
+- More on Linear Regression: http://rstatistics.net/linear-regression-with-r-a-numeric-example/
+
+
+

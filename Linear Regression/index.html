@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Finlad-Uganda Data science Meetup</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Finlad-Uganda Data science Meetup">
+  <meta name="author" content="Myriam Munezero, Joshua Olayemi and Richard Ngamita">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/quiz/css/demo.css"></link>
+<link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Finlad-Uganda Data science Meetup</h1>
+    <h2></h2>
+    <p>Myriam Munezero, Joshua Olayemi and Richard Ngamita<br/>Think Africa, Enpse Group, Data Science Africa</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Plan for today</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Introduction of organisers</li>
+<li>What is Data Science?</li>
+<li>Today&#39;s topic: Linear Regression</li>
+<li>Training in R</li>
+<li>Training in Python</li>
+<li>Q&amp;A and suggestions for future sessions</li>
+<li>End of session</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Introduction of hosts</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="https://pbs.twimg.com/profile_images/660427564280889344/9qp_2Gbv_400x400.jpg" height=80px width=80px/> <strong>Think Africa Ry</strong> </p>
+
+<ul>
+<li><p>Myriam Munezero: </p>
+
+<ul>
+<li>Director of Operations at Think Africa</li>
+<li>Post-doctoral researcher at University of Helsinki</li>
+<li>Website <a href="Myriam&#x27;s%20website">http://myriammunezero.com/</a></li>
+</ul></li>
+<li><p>Joshua Olayemi: Founder and CEO at Enpse Group</p>
+
+<ul>
+<li>Website <a href="Joshua%20on%20LinkedIn">https://www.linkedin.com/in/olayemi-akinsanya-527a4a56/</a></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Introduction of hosts cont...</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="http://www.datascienceafrica.org/img/logo.png" height=50 /> <strong>Data Science Africa</strong></p>
+
+<ul>
+<li>Richard Ngamita: Co-founder and Vice-Chairman of Data Science Africa
+
+<ul>
+<li>Website <a href="http://www.datascienceafrica.org">http://www.datascienceafrica.org</a></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Why Data Science?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img class=center src="https://image.slidesharecdn.com/python4datascience-150519204755-lva1-app6892/95/python-for-data-science-2-638.jpg?cb=1432071320" height=400px /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>What is Data Science?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img class=center src="assets/img/whatdatascience.png" height = 100px width=100px /></p>
+
+<p><a href="source">http://i.imgur.com/nFXKnl7.png</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Aim of these trainings</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Develop hands-on skills on basic essential approaches in data science</p></li>
+<li><p>Encourage collaboration between Finland and Uganda, and </p></li>
+<li><p>Solve problems particular to Africa - who better than us :)</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Structure of these trainings</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Total of 4 trainings in 2018:</h3>
+
+<ul>
+<li><p>Linear regression (R &amp; Python)</p></li>
+<li><p>Data collection, cleaning, exploration, and visualization (R) ~ June</p></li>
+<li><p>Supervised and Unsupervised classification (R) ~ August</p></li>
+<li><p>Neural Networks (R) ~ October</p></li>
+<li><p>A &quot;Graduation&quot; ~ November</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>Some practicalities</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Trainings will be recorded and made available on our YouTube Channel</p></li>
+<li><p>The slides and other learning materials will be made available on <a href="github">https://github.com/mdoucem/Fin-Ug-Datascience-Meetup</a></p></li>
+<li><p>Course slides include extra reading matierials - lots of things to learn!</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Why R and Python</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Both excelent for data science</h3>
+
+<ul>
+<li>Free</li>
+<li>Compehensive set of packages for
+
+<ul>
+<li>Data access</li>
+<li>Data cleaning</li>
+<li>Analysis</li>
+<li>Data reporting</li>
+</ul></li>
+<li>Good development environments</li>
+<li>Amazing ecosystem of developers and </li>
+<li>Packages are easy to install</li>
+</ul>
+
+<p>For a good discussion of R vs. Python for data science <a href="read%20here">https://www.kdnuggets.com/2015/05/r-vs-python-data-science.html</a>.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Today&#39;s topic - Linear Regression</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Regression is probably the most fundamental topic for the data scientist.</p></li>
+<li><p>A data scientist well versed in regression models will be able to solve an incredible array of problems.</p></li>
+<li><p>Regression models are the workhorse of data science. They are the most well described, practical and theoretically understood models in statistics. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Regression terminology</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li><p>There is a dependent variable \(Y\) - The Criterion variable</p></li>
+<li><p>Vaiables \(X\) it depends on - the independent variable or the predictor variable or features</p></li>
+</ol>
+
+<p>As an example</p>
+
+<pre><code>##   X  Y
+## 1 4  2
+## 2 4 10
+## 3 7  4
+## 4 7 22
+## 5 8 16
+## 6 9 10
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Regression terminology cont...</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Linear regression -&gt; finding the best-fitting straight line through a set of points.</p>
+
+<ol>
+<li>The best-fitting line is called a regression line</li>
+</ol>
+
+<ul>
+<li>mathematically generalized as: \[Y_i = \beta_0 + \beta_1 X_i + \epsilon_{i}\],
+
+<ul>
+<li>where \(\beta_{1}\) is the Intercept, and \(\beta_{2}\) is the Slope i.e., coeffiecients or parameters and that&#39;s what we want to estimate.</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Regression terminology cont...</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The resulting line, models the relationship between Y and X</p>
+
+<ul>
+<li>Upward trend</li>
+<li>Downward trend</li>
+<li>Y does not depend on X</li>
+</ul>
+
+<p><img class=center src="https://cdn-images-1.medium.com/max/560/1*N2usf10aKCq1JBIqxj-YFQ.png" height=200/></p>
+
+<p><a href="source">http://slideplayer.com/slide/4474901/</a></p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Regression terminology cont...</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Used to the estimate the value of  Y, when only the predictors (Xs) values are known.</p>
+
+<ul>
+<li>&#39;Simple&#39; when X is only one variable</li>
+<li>&#39;Multivariate&#39; when X has many variables</li>
+</ul></li>
+</ul>
+
+<p><img src="assets/img/regression.png" height = 300 /></p>
+
+<p><a href="source">https://image.slidesharecdn.com/slides-linear-regression-160108114550/95/regression-analysis-using-python-33-1024.jpg?cb=1489404631</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Regression terminology cont...</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Evaluate how good it is</h3>
+
+<ul>
+<li><p>Looking at our formula again, </p>
+
+<ul>
+<li>mathematically generalized as: \[Y_i = \beta_0 + \beta_1 X_i + \epsilon_{i}\],</li>
+</ul></li>
+<li><p>Objective is to minimize the \(\epsilon_{i}\) -&gt; the difference between our observations and the predictors made by our linear model </p></li>
+</ul>
+
+<p><img href="assets/img/residuals.png" height=300px /></p>
+
+<p><a href="source">http://statstudent.tumblr.com/post/108699142671/simple-linear-regression-methods-ii-week-of</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Let&#39;s get started with the practical exercise</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Today&#39;s training will be on linear regression in R and Python.</h3>
+
+<ul>
+<li><p>R, Rstudio and Pyhon introductions</p></li>
+<li><p>Loading and exploring the dataset -&gt; Salary data. </p></li>
+<li><p>Build a simple linear regression model and evaluate how good it is.</p></li>
+<li><p>Use model for prediction.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>Feedback and Discussion</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Wishes for the trainings</p></li>
+<li><p>What should we do different?</p></li>
+</ul>
+
+<p>Contacts: 
+<a href="mailto:myriam@thinkafrica.fi">myriam@thinkafrica.fi</a> 
+<a href="mailto:o.j@enpsegroup.com">o.j@enpsegroup.com</a>
+<a href="mailto:ngamita@gmail.com">ngamita@gmail.com</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Extra reading materials</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>A great course with more stats and maths: <a href="https://www.coursera.org/learn/machine-learning/home/welcome">https://www.coursera.org/learn/machine-learning/home/welcome</a></p></li>
+<li><p>More on Linear Regression: <a href="http://rstatistics.net/linear-regression-with-r-a-numeric-example/">http://rstatistics.net/linear-regression-with-r-a-numeric-example/</a></p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Plan for today'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Introduction of hosts'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Introduction of hosts cont...'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Why Data Science?'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='What is Data Science?'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Aim of these trainings'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Structure of these trainings'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Some practicalities'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Why R and Python'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='Today&#39;s topic - Linear Regression'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='Regression terminology'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Regression terminology cont...'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Regression terminology cont...'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Regression terminology cont...'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Regression terminology cont...'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Let&#39;s get started with the practical exercise'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Feedback and Discussion'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='Extra reading materials'>
+         18
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/quiz/js/jquery.quiz.js"></script>
+<script src="libraries/widgets/quiz/js/mustache.min.js"></script>
+<script src="libraries/widgets/quiz/js/quiz-app.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
