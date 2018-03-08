@@ -1,4 +1,4 @@
-# Fin-Ug Data Science Meetup
+# Finland-Uganda Data Science Meetup
 
 This is the repository for the course materials.
 
