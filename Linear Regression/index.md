@@ -39,8 +39,8 @@ knit        : slidify::knit2slides
 
 <img src="http://www.datascienceafrica.org/img/logo.png" height=50 /> __Data Science Africa__
   
-  - Richard Ngamita: Co-founder and Vice-Chairman of Data Science Africa
-    - Website [http://www.datascienceafrica.org](http://www.datascienceafrica.org)
+  - Richard Ngamita: Founder at KampalR usergroup 
+    - Website []()
 
 ---
 ## Why Data Science?
@@ -51,7 +51,7 @@ knit        : slidify::knit2slides
 ---
 ## What is Data Science?
 
-<img class=center src="assets/img/whatdatascience.png" height = 100px width=100px />
+<img class=center src="assets/img/whatdatascience.png" height = 500px width=500px />
 
 [http://i.imgur.com/nFXKnl7.png](source)
 
@@ -144,10 +144,9 @@ As an example
 
 Linear regression -> finding the best-fitting straight line through a set of points.
 
-3. The best-fitting line is called a regression line
+3. The best-fitting line is called a regression line: Mathematically generalized as: $$Y_i = \beta_0 + \beta_1 X_i$$,
 
-- mathematically generalized as: $$Y_i = \beta_0 + \beta_1 X_i + \epsilon_{i}$$,
-  - where $\beta_{1}$ is the Intercept, and $\beta_{2}$ is the Slope i.e., coeffiecients or parameters and that's what we want to estimate.
+- where $\beta_{1}$ is the Intercept, and $\beta_{2}$ is the Slope i.e., coeffiecients or parameters that we want to estimate.
 
 
 
@@ -169,11 +168,11 @@ Linear regression -> finding the best-fitting straight line through a set of poi
 ---
 ## Regression terminology cont...
 
-- Used to the estimate the value of  Y, when only the predictors (Xs) values are known.
+- Used to the estimate the value of  Y, when only the predictors (X) values are known.
 
   - 'Simple' when X is only one variable
   
-  - 'Multivariate' when X has many variables
+  - 'Bivariate' and 'Multivariate' when X has two and many variables respectively
   
 <img src="assets/img/regression.png" height = 300 />
 
@@ -182,14 +181,12 @@ Linear regression -> finding the best-fitting straight line through a set of poi
 ---
 ## Regression terminology cont...
 
-### Evaluate how good it is
+### Evaluating how good it is
 
-- Looking at our formula again, 
-  - mathematically generalized as: $$Y_i = \beta_0 + \beta_1 X_i + \epsilon_{i}$$,
-
+- Looking at our formula again: $$Y_i = \beta_0 + \beta_1 X_i + \epsilon_{i}$$,
 - Objective is to minimize the $\epsilon_{i}$ -> the difference between our observations and the predictors made by our linear model 
 
-<img href="assets/img/residuals.png" height=300px />
+<img class=center src="assets/img/residuals.png" height=300px width=300px />
 
 [http://statstudent.tumblr.com/post/108699142671/simple-linear-regression-methods-ii-week-of](source)
 
@@ -201,7 +198,7 @@ Linear regression -> finding the best-fitting straight line through a set of poi
 
   - R, Rstudio and Pyhon introductions
   
-  - Loading and exploring the dataset -> Salary data. 
+  - Loading and exploring the dataset -> Economic data Africa. 
   
   - Build a simple linear regression model and evaluate how good it is.
   
@@ -218,9 +215,12 @@ Linear regression -> finding the best-fitting straight line through a set of poi
 - What should we do different?
 
 Contacts: 
-myriam@thinkafrica.fi 
-o.j@enpsegroup.com
-ngamita@gmail.com
+
+* myriam@thinkafrica.fi
+
+* o.j@enpsegroup.com
+
+* ngamita@gmail.com
 
 ---
 ## Extra reading materials
