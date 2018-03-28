@@ -38,8 +38,8 @@ plot(x=X, y=Y, main = "Unemployment Rate (%) ~Goverment Expenditure (%)")
 scatter.smooth(x=X, y=Y, main = "Unemployment Rate (%) ~ Goverment Expenditure (%)")
 
 # So how does this line look like? "The scatter plot along with the smoothing 
-# line above suggests that there is a linearly increasing relationship between the âsalaryâ 
-# and âyears of expereinceâ variables. This is a good thing, because, one of the underlying 
+# line above suggests that there is a linearly increasing relationship between the 
+# government expenditure and unemployment rate variables. This is a good thing, because, one of the underlying 
 # assumptions in linear regression is that the relationship 
 # between the response and predictor variables is linear and additive.
 
@@ -55,7 +55,7 @@ cor(X, Y)
 # It is good to check for outliers as these might affect your model.
 par(mfrow = c(1,2)) # divide graph area in 2 columns
 boxplot(X, main="Government expenditure") 
-boxplot(Y, main="Unemployment rates") # sub=paste("Outlier rows: ", boxplot.stats(Y)$out), sep=" ") 
+boxplot(Y, main="Unemployment rates")  
 
 # We do find outliers. Let's remove the biggest outlier as this will affect our model.
 mydata<-mydata[mydata$GovExpenditurePerc<80, ]
@@ -83,10 +83,9 @@ linearMod<-lm(UnemploymentPerc ~ GovExpenditurePerc, data = trainset)
 
 # What does this model look like?
 print(linearMod)
-# From the output, we are mostly interested in the  Coefficients of our model.
-# This has part having two components: 
-# Intercept: 2,9533, Slope: 0,2508 These are also called the beta coefficients. 
-# In other words, => Unemployment = 2,9533 + 0,2508 * Government Expenditure
+# From the output, we are mostly interested in the  Coefficients of our model. This has part having two components: 
+# Intercept: -3.5539, Slope: 0.4942 These are also called the beta coefficients. 
+# In other words, => Unemployment = -3.5539 + 0.4942 * Government Expenditure
 
 # With these coefficients, if given a new amount of government expenditure in Africa, 
 # we can use it to predict what the unemployment rate is.
@@ -157,5 +156,3 @@ mse_test
 multiMod<-lm(UnemploymentPerc ~ GovExpenditurePerc + X1 + X2, data = trainset)
 
 ##----------That's it for now!--------------##
-
-#
