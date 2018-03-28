@@ -1,0 +1,191 @@
+---
+title: "Linear-regression-FiUgDataMeetup"
+author: "Myriam Munezero"
+date: "21 March 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+# Introduction
+The session looks at the use of Linear regression for analysing the relationship between nations' government expenditure and unemployment. 
+
+## Load the necessary libraries
+```{r}
+library(ggplot2) # needed for the plots
+library(caret) # needed for building ML models
+```
+
+## Load data
+```{r}
+mydata<-read.csv("economic-data-africa.csv", header = TRUE, sep = ";", stringsAsFactors = FALSE, dec = ",", na.strings = "N/A") 
+```
+
+
+## Explore the data
+
+### Before building model - good practice to analyze and understand how the data looks like
+```{r}
+class(mydata) # class of mydata (e.g., numeric, matrix, data frame, etc)
+dim(mydata) # dimensions of mydata
+str(mydata) # see the structure of mydata
+summary(mydata) # gives more information
+head(mydata) # or can use tail(mydata, 10)
+```
+
+# Identify if any missing values exist in our data set and the quantity
+
+```{r}
+sum(is.na(mydata))  # 1.returns TRUE of mydata is missing 2. count the amount of missing values
+
+```
+
+## Explore with visuals as well
+
+```{r}
+X<-mydata$GovExpenditurePerc
+Y<-mydata$UnemploymentPerc
+```
+
+1. Lets plot a scatter plot
+```{r}
+plot(x=X, y=Y, main = "Unemployment Rate (%) ~Goverment Expenditure (%)") 
+
+```
+
+Looking at these plots, would it be possible for us to plot a line through these points
+
+# 2. Instead of imgining, we can use the scatter.smooth function draws the line
+```{r}
+scatter.smooth(x=X, y=Y, main = "Unemployment Rate (%) ~ Goverment Expenditure (%)")
+
+```
+
+So how does this line look like? The scatter plot along with the smoothing line above suggests that there is a linearly increasing relationship between the government expenditure and unemployment rate variables. This is a good thing, because, one of the underlying assumptions in linear regression is that the relationship between the dependent and independent variables is linear.
+
+With this function, if there looks to be a line, then we know that linear regression might be the appropriate prediction approach for this dataset.
+
+3. Another way of checking if there is a relationship between our variables is to plot a correlation map. We can do that as follows:
+```{r}
+cor(X, Y)
+
+```
+
+4. Let's also do a boxplot - A box plot is good for seeing if there are any outliers. It is good to check for outliers as these might affect your model.
+```{r}
+par(mfrow = c(1,2)) # divide graph area in 2 columns
+boxplot(X, main="Government expenditure") 
+boxplot(Y, main="Unemployment rates") 
+```
+
+We do find outliers. Let's remove the biggest outlier as this will affect our model.
+```{r}
+mydata<-mydata[mydata$GovExpenditurePerc<80, ]
+
+```
+
+
+## Let's build the linear model 
+
+Now that we have seen the linear relationship pictorially using the scatter plot let us now see the syntax for building the linear model.
+
+First, we split the dataset into training and test set
+```{r}
+set.seed(7) # To ensure that our data is randomly split in the same for all our runs
+inTrain<-createDataPartition(Y, p =0.8, list = FALSE)
+
+trainset<-mydata[inTrain,]
+testset<-mydata[-inTrain,]
+dim(trainset) # 43   4
+dim(testset) # 8   4
+```
+
+
+
+The lm() function is what is used to build a linear regression model in R. It takes in two main arguments, namely: 1. Formula 2. Data.
+```{r}
+linearMod<-lm(UnemploymentPerc ~ GovExpenditurePerc, data = trainset) 
+```
+
+Building the linear model establishes a mathematical relationship between the predictor and factors.
+
+# What does this regression line now look like?
+```{r}
+print(linearMod)
+```
+
+From the output, we are mostly interested in the  Coefficients of our model. This has part having two components: 
+Intercept: -3.5539, Slope: 0.4942 These are also called the beta coefficients. 
+In other words, => Unemployment = -3.5539 + 0.4942 * Government Expenditure
+
+With these coefficients, if given a new amount of government expenditure in Africa, we can use it to predict what the unemployment rate is.
+
+##Let's evaluate how good our linear model is
+
+With our model, we can make predictions on new data, but will they be good? That is what we also have to find out! Before using the regression model, we have to ensure that it is statistically significant. 
+We can check this by printing the summary statistics for linearMod.
+```{r}
+sm<-summary(linearMod)
+sm
+```
+
+In these results, there are a few things to look at: 
+1. p-value of the model p-Value (bottom last line) and the p-Value of individual predictor variables (extreme right column under Coefficients). The p-Values are very important because, we can consider a linear model to be statistically significant only when both these p-Values are less that the pre-determined statistical significance level, which is ideally 0.05. 
+
+This is visually interpreted by the significance stars at the end of the row. The more the stars beside the variables p-Value, the more significant the variable. if p-value is less than 0.05, we can conclude that our model is indeed statistically significant.
+
+2. Both standard errors (closer to zero the better) and 3. F-statistic (higher the better) are measures of goodness of fit.
+
+WE can also look at a third measure - the Mean Squared Error
+```{r}
+mse <- mean(sm$residuals^2)
+mse
+```
+
+
+## Diagnostic plots
+
+Let's plot and see our model with the training data set
+```{r}
+par(mfrow = c(1,1))
+plot(x=trainset$GovExpenditurePerc, y=trainset$UnemploymentPerc, main = "UnemploymentPerc ~ GovExpenditurePerc") 
+abline(linearMod, col = "red") # show the line abline(lm(y ~x)) - best line that fits the points
+```
+
+
+## Let's do some prediction with our linear model is
+
+First use the model to make predictions on our test set
+```{r}
+unemplPred<-predict(linearMod, newdata = testset)
+
+```
+
+Get and plot the predicted values of the test data to see how our model performs
+
+```{r}
+ggplot(testset, aes(x=testset$GovExpenditurePerc, y =testset$UnemploymentPerc)) +
+  geom_segment(aes(xend = testset$GovExpenditurePerc, yend = unemplPred), alpha = .2) +
+  geom_point() + 
+  geom_point(aes(y = unemplPred), shape = 1, col = "red") +
+  theme_bw()
+```
+
+## Assessment
+
+1. What do you think of the model? 
+2. What could we do to improve it? Are the variable sufficient?
+
+If we had more variables to consider, e.g., country's GDP, then the formula for training our linear model with multiple variables would be something like this, where X1 and X2 are other variable names.
+```{r}
+#multiMod<-lm(UnemploymentPerc ~ GovExpenditurePerc + X1 + X2, data = trainset) 
+```
+
+
+##----------That's it for now!--------------##
+
+
+
