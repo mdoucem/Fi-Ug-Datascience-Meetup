@@ -1,8 +1,8 @@
 ---
-title       : Finlad-Uganda Data science Meetup
+title       : Finlad-Uganda Data science Meetup 
 subtitle    : 
 author      : Myriam Munezero, Joshua Olayemi and Richard Ngamita
-job         : Think Africa, Enpse Group, Data Science Africa
+job         : Think Africa, Enpse Group, KampalR
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
@@ -37,10 +37,10 @@ knit        : slidify::knit2slides
 ---
 ## Introduction of hosts cont...
 
-<img src="http://www.datascienceafrica.org/img/logo.png" height=50 /> __Data Science Africa__
+<img src="assets/img/kampalr.jpg" height = 100px width=100px /> __KampalR__
   
-  - Richard Ngamita: Founder at KampalR usergroup 
-    - Website []()
+  
+  - Richard Ngamita: Founder at KampalR user group 
 
 ---
 ## Why Data Science?
@@ -63,6 +63,8 @@ knit        : slidify::knit2slides
 - Encourage collaboration between Finland and Uganda, and 
 
 - Solve problems particular to Africa - who better than us :)
+
+#FiUgDataMeetup
 
 
 
@@ -215,6 +217,8 @@ Linear regression -> finding the best-fitting straight line through a set of poi
 ## Feedback and Discussion
 
 - Wishes for the trainings
+  - Next session (downloading data from online source, data cleaning, exploration and visualization)
+    - Ideas for data sets?
 
 - What should we do different?
 
