@@ -1,6 +1,6 @@
 """
 Created on Friday March  2, 2018
-@author: Joshua Olayemi
+@author: Joshua Olayemi and Myriam Munezero
 """
 
 # Import the needed libraries
