@@ -1,4 +1,7 @@
-setwd("C:/Users/munezero/Documents/Personal-ventures/Courses/mydeck")
+###
+# author: Myriam Munezero
+# date: 28.03.208
+###
 
 ## Load the necessary libraries
 library(ggplot2) # needed for the plots
