@@ -1,5 +1,5 @@
 ---
-title       : Finlad-Uganda Data science Meetup 
+title       : Finland-Uganda Data science Meetup 
 subtitle    : 
 author      : Myriam Munezero, Joshua Olayemi and Richard Ngamita
 job         : Think Africa, Enpse Group, KampalR
