@@ -60,9 +60,9 @@ knit        : slidify::knit2slides
 
 - Develop hands-on skills on basic essential approaches in data science
 
-- Encourage collaboration between Finland and Uganda, and 
+- Encourage collaboration between Finland and African countries, and 
 
-- Solve problems particular to Africa - who better than us :)
+- Work on problems that are particular to Africa
 
 #FiUgDataMeetup
 
@@ -71,7 +71,7 @@ knit        : slidify::knit2slides
 ---
 ## Structure of these trainings
 
-### Total of 4 trainings in 2018:
+### 4 trainings in 2018:
 
 - Linear regression (R & Python)
 
@@ -90,8 +90,6 @@ knit        : slidify::knit2slides
 
 ---
 ## Some practicalities
-
-- Trainings will be recorded and made available on our YouTube Channel
 
 - The slides and other learning materials will be made available on [https://github.com/mdoucem/Fin-Ug-Datascience-Meetup](github)
 
@@ -217,7 +215,7 @@ Linear regression -> finding the best-fitting straight line through a set of poi
 ## Feedback and Discussion
 
 - Wishes for the trainings
-  - Next session (downloading data from online source, data cleaning, exploration and visualization)
+  - Next session (downloading data, data cleaning, exploration and visualization)
     - Ideas for data sets?
 
 - What should we do different?
