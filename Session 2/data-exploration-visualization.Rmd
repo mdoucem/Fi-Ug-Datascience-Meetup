@@ -1,0 +1,228 @@
+---
+title: "Lending Club Data Exploration and Visualization"
+author: "Myriam Munezero"
+date: "29 May 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+
+## Introduction
+Lending clubs are peer-to-peer lending companies. Lending clubs operates an online lending platform that enables borrowers to obtain a loan, and investors to purchase notes backed by payments made on loans (Source: Wikipedia).
+
+We have three data sets that pertain to the borrower, loan classification, and the payments information. Our objective is to work with the data, explore it and perhaps gain some insights into it.
+
+### We will go through
+- Reading in the data
+- Data cleaning and preprocessing
+- Feature transformation
+- Exploration and visualization
+
+## Load needed libraries
+```{r}
+library(ggplot2) 
+library(stringr)
+library(dplyr)
+library(lubridate)
+library(reshape2)
+library(corrplot)
+```
+
+## Read in the data
+```{r data}
+borrower_df<-read.csv("data/Borrower Information.csv", na.strings = "NA")
+loan_class_df<- read.csv("data/Loan Classification Information.csv", na.strings = "NA")
+loan_payment_info<-load(file = "data/Loan Payment Information.Rda")
+payments_df<-Payment.df
+```
+
+
+## View how the data looks like
+```{r}
+head(borrower_df)
+```
+
+```{r}
+head(loan_class_df)
+```
+
+```{r}
+head(payments_df)
+```
+
+## Data cleaning and preprocessing
+
+Let's first merge the datasets
+```{r pressure, echo=FALSE}
+loan_df<-merge(loan_class_df, payments_df, by="id")
+full_df<-merge(borrower_df, loan_df, by="member_id")
+```
+
+
+Check the missing colums
+```{r}
+sapply(full_df, function(x) sum(length(which(is.na(x)))))
+```
+
+Remove columns where majority of columns are empty
+```{r}
+full_df<-full_df[, -which(colMeans(is.na(full_df)) > 0.5)]
+```
+
+
+Remove unneeded colums
+```{r}
+to_remove = c('X.x', 'emp_title', 'X.y', 'desc', 'title', 'zip_code', 'earliest_cr_line', 'sub_grade', 'last_pymnt_d', 'next_pymnt_d', 'last_credit_pull_d', 'recoveries', 'collection_recovery_fee', 'pymnt_plan', 'application_type')
+full_df<-full_df[, !(names(full_df) %in% to_remove)]
+
+```
+
+
+## Feature transformation
+
+First transform the 'term' column
+```{r}
+full_df$term<-str_replace_all(full_df$term, " months", "")
+full_df$term<-as.numeric(full_df$term)
+
+```
+
+Transform the 'emp_length' column
+```{r}
+full_df$emp_length<-str_replace_all(full_df$emp_length, "n/a", "0")
+full_df$emp_length<-str_replace_all(full_df$emp_length, "\\+ years", "")
+full_df$emp_length<-str_replace_all(full_df$emp_length, " years", "")
+full_df$emp_length<-str_replace_all(full_df$emp_length, "< 1 year", "0")
+full_df$emp_length<-str_replace_all(full_df$emp_length, " year", "")
+full_df$emp_length<-as.numeric(full_df$emp_length)
+```
+
+Transform the 'grade' column
+```{r}
+full_df$grade<-str_replace_all(full_df$grade, "A", "1")
+full_df$grade<-str_replace_all(full_df$grade, "B", "2")
+full_df$grade<-str_replace_all(full_df$grade, "C", "3")
+full_df$grade<-str_replace_all(full_df$grade, "D", "4")
+full_df$grade<-str_replace_all(full_df$grade, "E", "5")
+full_df$grade<-str_replace_all(full_df$grade, "F", "6")
+full_df$grade<-str_replace_all(full_df$grade, "G", "7")
+full_df$grade<-as.numeric(full_df$grade)
+```
+
+Transform loan_status
+```{r}
+full_df$loan_status[full_df$loan_status=="Does not meet the credit policy. Status:Fully Paid"]<-"Fully Paid"
+full_df$loan_status[full_df$loan_status=="Does not meet the credit policy. Status:Charged Off"]<-"Charged Off"
+full_df$loan_status<-factor(full_df$loan_status)
+```
+
+## Impute missing values
+
+Check the pattern of missing values
+```{r}
+library(mice)
+md.pattern(full_df)
+```
+
+Another way to visualize missing values
+```{r}
+library(VIM)
+aggr(full_df, col=c('navyblue', 'red'), numbers=TRUE, sortVars=TRUE)
+```
+
+Omit the missing values
+```{r}
+full_df_df<-na.omit(full_df)
+anyNA(full_df)
+```
+
+
+## Exploration and visualization
+
+Get correlations of numeric variables
+```{r}
+numeric.var<-sapply(full_df, is.numeric)
+corr.matrix<-cor(full_df[,numeric.var])
+corrplot(corr.matrix, main="\n\nCorrelation plot for numerical variables", method="number", na.label = "NA")
+```
+
+Remove those are highly correlated
+```{r}
+to_remove = c('int_rate', 'funded_amnt', 'funded_amnt_inv', 'installment', 'out_prncp_inv', 'total_pymnt_inv', 'total_rec_prncp')
+full_df<-full_df[ !(names(full_df) %in% to_remove)] 
+```
+
+Let's visualize some of the variables
+
+Distribution of the grade
+```{r}
+g1<-ggplot(full_df, aes(x=grade)) + ggtitle("Distriution of Loan Grade") + xlab("Grade") + geom_bar(aes(y = 100*(..count..)/sum(..count..)), width = 0.5, fill="#FF9999") + ylab("Percentage") + coord_flip() +
+  scale_x_discrete(name="grade") 
+g1
+```
+
+Relation between grade and loan status
+```{r}
+g2<-ggplot(full_df, aes(x=grade, fill=as.factor(loan_status))) + ggtitle("Distribution of Loan Grade by the Loan Status") + xlab("Grade") + geom_bar(aes(y = 100*(..count..)/sum(..count..)), position = "dodge", width = 0.5) + ylab("Percentage") + coord_flip() +  scale_fill_discrete(name = "Loan Status")
+g2
+```
+
+Distribution of variables
+```{r}
+numeric_cols<-sapply(full_df, is.numeric)
+full_df.lngf<-melt(full_df[, numeric_cols], id.vars = "grade")
+g3<-ggplot(aes(x=value, group=grade, colour=factor(grade)), data=full_df.lngf) + geom_density() + facet_wrap(~variable, scales = "free")
+g3
+```
+
+View the numerical variables along boxplots
+```{r}
+# View plots are a good way of also showing outliers
+g4<-ggplot(aes(x="", y=value, group=grade, colour=factor(grade)), data=full_df.lngf) + geom_boxplot() + facet_wrap(~variable, scales = "free")
+g4
+```
+
+view trend of the loan amount over the issue date
+```{r}
+# 
+table(full_df$issue_d) # can see that we have data from April 2013 to September 2015
+# transform the issue_d
+full_df$issue_d<-dmy(paste0("01-", full_df$issue_d))
+g5<-ggplot(full_df, aes(x=issue_d, y=loan_amnt)) + stat_summary(fun.y = "sum", geom = "bar", fill="ivory") + xlab("Issued Date") + ylab("Loan Amount") + ggtitle("Loan amount over the Issued Dates")
+g5
+```
+
+Visualize the states - loan amount
+```{r}
+library(maps)
+full_df$region<-full_df$addr_state
+full_df$region<-as.factor(full_df$region)
+levels(full_df$region)<-c("alaska", "alabama","arkansas", "arizona", "california","colorado","connecticut","district of columbia","delaware","florida","georgia","hawaii","iowa","idaho","illinois","indiana","kansas","kentucky","louisiana","massachusetts","maryland","maine","michigan","minnesota","missouri","mississippi","montana","north carolina","north dakota","nebraska","new hampshire","new jersey","new mexico","nevada","new york","ohio","oklahoma","oregon","pennsylvania","rhode island","south carolina","south dakota","tennessee","texas","utah","virginia","washington","wisconsin","vermont", "west virginia","wyoming")
+
+states<-map_data("state")
+
+# create view by loan
+state_by_loan<-full_df %>% 
+  group_by(region) %>% 
+  summarise(value = sum(loan_amnt, na.rm = TRUE))
+
+
+state_by_loan$region<-as.character(state_by_loan$region)
+state_by_loan<-as.data.frame(state_by_loan)
+Total<-merge(states, state_by_loan, by = "region")
+
+# If you also want to save the image as png
+png("state_loanamount_map.png", width=600, height=480)
+ggplot() + geom_polygon(data = Total, aes(x=long, y=lat, group = group, fill=Total$value), colour = "white") + scale_fill_continuous(low = "#ece7f2", high = "#2b8cbe", guide = "colorbar") + theme_bw() + labs(fill = "Gradient of loan amount", title = "Heat Map of loan amount in all the states", x="", y="") + scale_y_continuous(breaks = c()) + scale_x_continuous(breaks = c()) + theme(panel.border = element_blank())
+dev.off()
+```
+
+## Save the data for future use
+```{r}
+saveRDS(full_df, file="myLoanData.rds")
+
+```
+
+End of file
