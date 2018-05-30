@@ -1,0 +1,10 @@
+## Introduction
+Lending clubs are peer-to-peer lending companies. Lending clubs operates an online lending platform that enables borrowers to obtain a loan, and investors to purchase notes backed by payments made on loans (Source: Wikipedia).
+
+We have three data sets that pertain to the borrower, loan classification, and the payments information. Our objective is to work with the data, explore it and perhaps gain some insights into it.
+
+### We will go through
+- Reading in the data
+- Data cleaning and preprocessing
+- Feature transformation
+- Exploration and visualization
