@@ -10,3 +10,6 @@ Our objective is to work with the data, explore it and perhaps gain some insight
 - Data cleaning and preprocessing
 - Feature transformation
 - Exploration and visualization
+
+### Get the data from here
+https://storage.googleapis.com/acn-data-storage/recruitment-task/Loan%20Data.zip
