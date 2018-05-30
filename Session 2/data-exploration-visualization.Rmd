@@ -134,7 +134,7 @@ aggr(full_df, col=c('navyblue', 'red'), numbers=TRUE, sortVars=TRUE)
 
 Omit the missing values
 ```{r}
-full_df_df<-na.omit(full_df)
+full_df<-na.omit(full_df)
 anyNA(full_df)
 ```
 
@@ -148,13 +148,15 @@ corr.matrix<-cor(full_df[,numeric.var])
 corrplot(corr.matrix, main="\n\nCorrelation plot for numerical variables", method="number", na.label = "NA")
 ```
 
-Remove those are highly correlated
-```{r}
-to_remove = c('int_rate', 'funded_amnt', 'funded_amnt_inv', 'installment', 'out_prncp_inv', 'total_pymnt_inv', 'total_rec_prncp')
-full_df<-full_df[ !(names(full_df) %in% to_remove)] 
+```{r echo=FALSE}
+png("corrplot_map.png", width=800, height=800)
+corrplot(corr.matrix, main="\n\nCorrelation plot for numerical variables", method="number", na.label = "NA")
+dev.off()
+
 ```
 
-Let's visualize some of the variables
+
+### Let's visualize some of the variables
 
 Distribution of the grade
 ```{r}
@@ -186,15 +188,12 @@ g4
 
 view trend of the loan amount over the issue date
 ```{r}
-# 
-table(full_df$issue_d) # can see that we have data from April 2013 to September 2015
-# transform the issue_d
 full_df$issue_d<-dmy(paste0("01-", full_df$issue_d))
-g5<-ggplot(full_df, aes(x=issue_d, y=loan_amnt)) + stat_summary(fun.y = "sum", geom = "bar", fill="ivory") + xlab("Issued Date") + ylab("Loan Amount") + ggtitle("Loan amount over the Issued Dates")
+g5<-ggplot(full_df, aes(x=issue_d, y=loan_amnt)) + stat_summary(fun.y = "sum", geom = "bar", fill="indianred4") + xlab("Issued Date") + ylab("Loan Amount") + ggtitle("Loan amount over the Issued Dates")
 g5
 ```
 
-Visualize the states - loan amount
+Visualize the states vs loan amount
 ```{r}
 library(maps)
 full_df$region<-full_df$addr_state
@@ -213,11 +212,20 @@ state_by_loan$region<-as.character(state_by_loan$region)
 state_by_loan<-as.data.frame(state_by_loan)
 Total<-merge(states, state_by_loan, by = "region")
 
-# If you also want to save the image as png
+options(scipen=999)
+g6<-ggplot() + geom_polygon(data = Total, aes(x=long, y=lat, group = group, fill=Total$value), colour = "white") + scale_fill_continuous(low = "#ece7f2", high = "#2b8cbe", guide = "colorbar") + theme_bw() + labs(fill = "Gradient of loan amount", title = "Heat Map of loan amount in all the states", x="", y="") + scale_y_continuous(breaks = c()) + scale_x_continuous(breaks = c()) + theme(panel.border = element_blank())
+g6
+```
+
+If you want to save the resulting image to e.g., png then put it as follows:
+```{r}
+options(scipen=999)
 png("state_loanamount_map.png", width=600, height=480)
 ggplot() + geom_polygon(data = Total, aes(x=long, y=lat, group = group, fill=Total$value), colour = "white") + scale_fill_continuous(low = "#ece7f2", high = "#2b8cbe", guide = "colorbar") + theme_bw() + labs(fill = "Gradient of loan amount", title = "Heat Map of loan amount in all the states", x="", y="") + scale_y_continuous(breaks = c()) + scale_x_continuous(breaks = c()) + theme(panel.border = element_blank())
 dev.off()
+
 ```
+
 
 ## Save the data for future use
 ```{r}
@@ -225,4 +233,4 @@ saveRDS(full_df, file="myLoanData.rds")
 
 ```
 
-End of file
+-------End of analysis--------
