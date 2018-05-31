@@ -149,6 +149,18 @@ library(lubridate)
 library(reshape2)
 library(corrplot)</code></pre>
 </div>
+<div id="import-the-data" class="section level2">
+<h2>Import the data</h2>
+<pre class="r"><code>outDir&lt;-&quot;data&quot;
+fileurl=&quot;https://storage.googleapis.com/acn-data-storage/recruitment-task/Loan%20Data.zip&quot;
+
+if (!file.exists(outDir)){
+  download.file(fileurl, &quot;Loandata.zip&quot;, method = &quot;libcurl&quot;)
+}
+
+zipF&lt;-&quot;Loandata.zip&quot;
+unzip(zipF, exdir = outDir)</code></pre>
+</div>
 <div id="read-in-the-data" class="section level2">
 <h2>Read in the data</h2>
 <pre class="r"><code>borrower_df&lt;-read.csv(&quot;data/Borrower Information.csv&quot;, na.strings = &quot;NA&quot;)

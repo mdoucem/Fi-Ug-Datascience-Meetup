@@ -30,6 +30,20 @@ library(reshape2)
 library(corrplot)
 ```
 
+## Import the data
+```{r}
+outDir<-"data"
+fileurl="https://storage.googleapis.com/acn-data-storage/recruitment-task/Loan%20Data.zip"
+
+if (!file.exists(outDir)){
+  download.file(fileurl, "Loandata.zip", method = "libcurl")
+}
+
+zipF<-"Loandata.zip"
+unzip(zipF, exdir = outDir)
+```
+
+
 ## Read in the data
 ```{r data}
 borrower_df<-read.csv("data/Borrower Information.csv", na.strings = "NA")
