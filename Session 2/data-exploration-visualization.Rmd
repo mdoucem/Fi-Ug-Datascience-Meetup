@@ -55,7 +55,7 @@ head(payments_df)
 ## Data cleaning and preprocessing
 
 Let's first merge the datasets
-```{r pressure, echo=FALSE}
+```{r}
 loan_df<-merge(loan_class_df, payments_df, by="id")
 full_df<-merge(borrower_df, loan_df, by="member_id")
 ```
